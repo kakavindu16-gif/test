@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  cinesubz-api:
+    build: .
+    container_name: cinesubz-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - HEADLESS=true
+      - PORT=3000
+    # Required for Chromium to run inside Docker
+    security_opt:
+      - seccomp=unconfined
+    shm_size: '256mb'
+    deploy:
+      resources:
+        limits:
+          memory: 1G
